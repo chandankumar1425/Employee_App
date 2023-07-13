@@ -1,0 +1,23 @@
+.btn{
+    width: 10rem;
+    height: 3rem; 
+    border:1px solid ;
+    border-radius: 10px;
+}
+.btn a{
+    text-decoration: none;
+    color: black;
+ 
+}
+
+
+.btn:hover {
+    background-color: #1152c9;
+    color: white;
+}
+
+.btn a:hover{
+    background-color: #1152c9;
+    color: white;
+ 
+}

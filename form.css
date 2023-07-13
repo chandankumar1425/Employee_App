@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    ;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #00328C;
+}
+
+.form-container {
+    text-align: center;
+    /* background-color: aquamarine; */
+    border-radius: 5px;
+    padding: 20px;
+
+}
+
+.input {
+    display: none;
+}
+
+.main {
+    margin: auto;
+    align-items: center;
+    background-color: white;
+    height: 40%;
+    width: 20%;
+}
+
+.toggle {
+    margin-bottom: 20px;
+}
+
+.toggle button {
+    /* border: none; */
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 10px;
+
+}
+
+.toggle button:hover {
+    background-color: #00328C;
+    color: white;
+}
+
+form input{
+    /* border: 2px solid red; */
+    margin-bottom: 10px;
+}
+
+
+.btn{
+    width: 7rem;
+    height: 2.5rem; 
+    border-radius: 10px;
+}
+
+
+.btn:hover {
+    background-color: #00328C;
+    color: white;
+}

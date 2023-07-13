@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./form.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="form-container" class="input">
+                <div class="toggle">
+                    <button id="login_toggle" class="active">Login</button>
+                    <button id="signup_toggle">Signup</button>
+
+                </div>
+                <form id="Signup">
+                    <input type="email" id="email" , placeholder="Enter Email Here" required> <br>
+                    <input type="password" id="password" , placeholder="Enter password Here" required><br>
+                    <input type="password" id="confirm" , placeholder="Enter Confirm Password Here" required> <br>
+                    <input type="Submit" class="submit" id="submit">
+
+                </form>
+
+                <form id="login" class="input">
+                    <input type="email" id="email1" , placeholder="Enter Email Here" required> <br>
+                    <input type="password" id="password1" , placeholder="Enter password Here" required> <br>
+                    <input type="Submit" class="submit" id="submit">
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+<script>
+    const loginform = document.getElementById("login")
+    const signupform = document.getElementById("Signup")
+    const login_toggler = document.getElementById("login_toggle")
+    const signup_toggler = document.getElementById("signup_toggle")
+
+    login_toggler.addEventListener("click", toggleform)
+    signup_toggler.addEventListener("click", toggleform)
+
+
+    function toggleform(e) {
+        e.preventDefault();
+        login_toggler.classList.toggle("active");
+        signup_toggler.classList.toggle("active");
+
+        loginform.style.display = login_toggler.classList.contains("active") ? 'block' : 'none';
+        signupform.style.display = signup_toggler.classList.contains("active") ? 'block' : 'none';
+    }
+
+    let signIn = document.querySelector("form");
+    let signUp = document.querySelector("form");
+
+    let users = JSON.parse(localStorage.getItem("usersData")) || [];
+
+
+    signUp.addEventListener("submit", (e) => {
+        e.preventDefault();
+        signup();
+        alert("SignupSuccess")
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1000);
+    });
+
+    function signup() {
+        let userObj = {
+            email: signUp.email.value,
+            password: signUp.password.value,
+        };
+        console.log(userObj);
+        fetch(`https://employee-app-jo84.onrender.com/api/signup`, {
+            method: "POST",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            });
+    }
+
+
+    signIn.addEventListener("submit", (e) => {
+        e.preventDefault();
+        CheckEmployee(signIn.email1.value, signIn.password1.value);
+    });
+
+    let myform = document.getElementById("login")
+    myform.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let email = document.getElementById("email1").value
+        let password = document.getElementById("password1").value
+
+        let obj = {
+            email: email,
+            password: password
+
+        }
+        console.log(obj)
+
+        fetch("https://employee-app-jo84.onrender.com/api/login", {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                console.log(res);
+                localStorage.setItem("token", res.token);
+                setTimeout(() => {
+                    alert("Login Sucessfull")
+                    window.location.href = "./dashboard.html";
+
+                }, 1000);
+
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Wrong Crendiatial")
+            })
+
+    })
+
+
+
+</script>
